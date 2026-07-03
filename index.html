@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manshine City FC — We Don't Dim</title>
+<link rel="icon" type="image/jpeg" href="crest.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -12,7 +13,7 @@
     --bg-panel: #0c0f1c;
     --bg-panel-2: #10142650;
     --cyan: #00f0ff;
-    --pink: #ff2fd0;
+    --red: #ff2140;
     --gold: #f9e94e;
     --ink: #eaf6ff;
     --ink-dim: #8ea3c4;
@@ -30,7 +31,7 @@
     overflow-x:hidden;
     background-image:
       radial-gradient(circle at 15% 10%, rgba(0,240,255,0.06), transparent 40%),
-      radial-gradient(circle at 85% 30%, rgba(255,47,208,0.07), transparent 40%);
+      radial-gradient(circle at 85% 30%, rgba(255,33,64,0.07), transparent 40%);
   }
 
   h1,h2,h3, .display{
@@ -41,7 +42,7 @@
 
   a{ color:inherit; text-decoration:none; }
 
-  ::selection{ background: var(--pink); color:#06070d; }
+  ::selection{ background: var(--red); color:#06070d; }
 
   /* ---------- scanline / grid floor texture ---------- */
   .grid-floor{
@@ -72,10 +73,10 @@
     font-weight:700; font-size:1.3rem; letter-spacing:0.08em;
     display:flex; align-items:center; gap:10px;
   }
-  .brand .dot{
-    width:10px; height:10px; border-radius:50%;
-    background: var(--cyan);
-    box-shadow: 0 0 8px var(--cyan), 0 0 18px var(--cyan);
+  .brand-logo{
+    width:34px; height:34px; border-radius:50%; object-fit:cover;
+    background:#fff;
+    box-shadow: 0 0 0 2px #06070d, 0 0 0 3px var(--cyan), 0 0 10px rgba(0,240,255,0.6);
   }
   .navlinks{ display:flex; gap:34px; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; }
   .navlinks a{ color: var(--ink-dim); position:relative; padding-bottom:4px; transition: color .25s; }
@@ -87,12 +88,12 @@
   }
   .navlinks a:hover::after{ width:100%; }
   .nav-cta{
-    border:1px solid var(--pink); color:var(--pink);
+    border:1px solid var(--red); color:var(--red);
     padding:9px 18px; border-radius:100px; font-size:0.85rem; font-weight:700;
-    letter-spacing:0.05em; box-shadow: 0 0 12px rgba(255,47,208,0.35) inset;
+    letter-spacing:0.05em; box-shadow: 0 0 12px rgba(255,33,64,0.35) inset;
     transition: all .25s;
   }
-  .nav-cta:hover{ background:var(--pink); color:#06070d; box-shadow:0 0 22px var(--pink); }
+  .nav-cta:hover{ background:var(--red); color:#06070d; box-shadow:0 0 22px var(--red); }
   .menu-btn{ display:none; background:none; border:none; color:var(--ink); font-size:1.6rem; cursor:pointer; }
 
   /* ---------- HERO ---------- */
@@ -116,16 +117,16 @@
       0 0 14px var(--cyan),
       0 0 28px var(--cyan),
       0 0 55px var(--cyan),
-      0 0 3px var(--pink);
+      0 0 3px var(--red);
     animation: flicker 5s infinite;
   }
   .hero-sign .accent{
     color:#fff;
     text-shadow:
       0 0 6px #fff,
-      0 0 14px var(--pink),
-      0 0 28px var(--pink),
-      0 0 55px var(--pink);
+      0 0 14px var(--red),
+      0 0 28px var(--red),
+      0 0 55px var(--red);
   }
   @keyframes flicker{
     0%, 3%, 6%, 100%{ opacity:1; }
@@ -155,7 +156,7 @@
   .btn-ghost{
     border:1px solid var(--ink-dim); color:var(--ink);
   }
-  .btn-ghost:hover{ border-color:var(--pink); color:var(--pink); box-shadow:0 0 16px rgba(255,47,208,0.4); }
+  .btn-ghost:hover{ border-color:var(--red); color:var(--red); box-shadow:0 0 16px rgba(255,33,64,0.4); }
 
   .hero-stats{
     display:flex; gap:50px; margin-top:70px; flex-wrap:wrap; justify-content:center;
@@ -171,8 +172,8 @@
   section{ position:relative; padding: 110px 5%; }
   .section-head{ max-width:640px; margin: 0 auto 60px; text-align:center; }
   .section-eyebrow{
-    color: var(--pink); font-size:0.78rem; font-weight:700; letter-spacing:0.3em;
-    text-shadow:0 0 10px rgba(255,47,208,0.6);
+    color: var(--red); font-size:0.78rem; font-weight:700; letter-spacing:0.3em;
+    text-shadow:0 0 10px rgba(255,33,64,0.6);
   }
   .section-title{ font-size: clamp(1.8rem, 4vw, 2.6rem); margin-top:10px; color:#fff; }
   .section-sub{ color:var(--ink-dim); margin-top:14px; font-size:1rem; line-height:1.6; }
@@ -183,7 +184,15 @@
     max-width:1100px; margin:0 auto; align-items:center;
   }
   .crest-wrap{ display:flex; justify-content:center; }
-  .crest{ width:230px; height:230px; }
+  .crest{
+    width:230px; height:230px; border-radius:50%; object-fit:cover;
+    background:#fff;
+    box-shadow:
+      0 0 0 4px #06070d,
+      0 0 0 6px var(--cyan),
+      0 0 24px rgba(0,240,255,0.55),
+      0 0 55px rgba(0,240,255,0.35);
+  }
   .about-copy p{ color:var(--ink-dim); line-height:1.8; margin-bottom:18px; font-size:1.02rem;}
   .about-copy strong{ color:var(--cyan); }
   .facts{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:26px; }
@@ -221,7 +230,7 @@
     color: transparent; -webkit-text-stroke: 1.5px var(--cyan); opacity:0.85;
   }
   .p-name{ font-family:'Rajdhani',sans-serif; font-weight:700; font-size:1.25rem; margin-top:8px; color:#fff;}
-  .p-pos{ color:var(--pink); font-size:0.78rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:4px;}
+  .p-pos{ color:var(--red); font-size:0.78rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:4px;}
   .p-tag{ color:var(--ink-dim); font-size:0.88rem; margin-top:12px; line-height:1.5;}
 
   /* ---------- FIXTURES (ticket stub style) ---------- */
@@ -235,8 +244,8 @@
     position:relative;
   }
   .ticket.featured{
-    border:1px solid var(--pink);
-    box-shadow:0 0 26px rgba(255,47,208,0.25);
+    border:1px solid var(--red);
+    box-shadow:0 0 26px rgba(255,33,64,0.25);
   }
   .ticket::after{
     content:''; position:absolute; right:130px; top:50%; transform:translateY(-50%);
@@ -249,7 +258,7 @@
   .t-match .vs{ font-family:'Rajdhani',sans-serif; font-weight:700; font-size:1.15rem; color:#fff; }
   .t-match .where{ color:var(--ink-dim); font-size:0.85rem; margin-top:4px; }
   .t-status{ text-align:right; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; color:var(--cyan); }
-  .t-status.live{ color:var(--pink); }
+  .t-status.live{ color:var(--red); }
 
   /* ---------- JOIN CTA ---------- */
   .join{
@@ -294,7 +303,7 @@
 <body>
 
 <nav>
-  <div class="brand"><span class="dot"></span>MANSHINE CITY</div>
+  <div class="brand"><img src="crest.jpg" alt="Manshine City crest" class="brand-logo">MANSHINE CITY</div>
   <button class="menu-btn" id="menuBtn">☰</button>
   <div class="navlinks" id="navLinks">
     <a href="#about">Club</a>
@@ -307,18 +316,18 @@
 
 <section class="hero">
   <div class="grid-floor"></div>
-  <div class="hero-eyebrow">Est. 2019 · The Radiant, Section 7</div>
+  <div class="hero-eyebrow">Founded 2026 · New Club, First Season</div>
   <h1 class="hero-sign">MAN<span class="accent">SHINE</span><br>CITY</h1>
-  <p class="hero-tag">We don't chase the light. We are the light. Electric football, played loud, played bright.</p>
+  <p class="hero-tag">Brand new club, already bright. This is where the story starts — and we're writing it from game one.</p>
   <div class="hero-actions">
-    <a href="#fixtures" class="btn btn-primary">See Next Match</a>
-    <a href="#squad" class="btn btn-ghost">Meet The Squad</a>
+    <a href="#join" class="btn btn-primary">Join The Squad</a>
+    <a href="#about" class="btn btn-ghost">Our Story</a>
   </div>
   <div class="hero-stats">
-    <div class="stat"><div class="num">18</div><div class="lbl">Wins This Season</div></div>
-    <div class="stat"><div class="num">64</div><div class="lbl">Goals Scored</div></div>
-    <div class="stat"><div class="num">#2</div><div class="lbl">League Standing</div></div>
-    <div class="stat"><div class="num">1.2K</div><div class="lbl">Fans In The Stands</div></div>
+    <div class="stat"><div class="num">01</div><div class="lbl">Season Number</div></div>
+    <div class="stat"><div class="num">2026</div><div class="lbl">Founded</div></div>
+    <div class="stat"><div class="num">Open</div><div class="lbl">Roster Spots</div></div>
+    <div class="stat"><div class="num">TBD</div><div class="lbl">Home Ground</div></div>
   </div>
 </section>
 
@@ -330,29 +339,15 @@
   </div>
   <div class="about">
     <div class="crest-wrap">
-      <svg class="crest" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="4" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        <polygon points="100,10 180,55 180,140 100,190 20,140 20,55" fill="none" stroke="#00f0ff" stroke-width="3" filter="url(#glow)"/>
-        <polygon points="100,30 162,65 162,130 100,168 38,130 38,65" fill="none" stroke="#ff2fd0" stroke-width="1.5" opacity="0.7"/>
-        <text x="100" y="98" text-anchor="middle" font-family="Rajdhani, sans-serif" font-weight="700" font-size="34" fill="#ffffff" filter="url(#glow)">MC</text>
-        <path d="M70 122 L90 122 L82 140 L112 114 L96 114 L104 96 L70 122 Z" fill="#f9e94e" filter="url(#glow)"/>
-      </svg>
+      <img src="crest.jpg" alt="Manshine City crest" class="crest">
     </div>
     <div class="about-copy">
-      <p>Manshine City started in a car park with two goalposts made of jackets and one rule: play like the floodlights are already on. Seven seasons later, the jackets are gone, but the rule stayed.</p>
-      <p>We're a <strong>attacking, high-tempo</strong> side built around movement and confidence on the ball. Home games are loud. Away days are louder. This is where <strong>the shine</strong> comes from — showing up bright when it matters most.</p>
+      <p>Manshine City just kicked off — a brand new club built on one idea: play like the floodlights are already on, from day one. No history yet. No trophies yet. Just a crest, a name, and a squad we're building right now.</p>
+      <p>We're aiming to be an <strong>attacking, high-tempo</strong> side built around movement and confidence on the ball. This page is the club's home base while we lock in players, a home ground, and our first fixtures. This is where <strong>the shine</strong> starts.</p>
       <div class="facts">
-        <div class="fact"><div class="k">Founded</div><div class="v">2019</div></div>
-        <div class="fact"><div class="k">Home Ground</div><div class="v">The Radiant</div></div>
-        <div class="fact"><div class="k">Colours</div><div class="v">Cyan & Pink</div></div>
+        <div class="fact"><div class="k">Founded</div><div class="v">2026</div></div>
+        <div class="fact"><div class="k">Home Ground</div><div class="v">TBD</div></div>
+        <div class="fact"><div class="k">Colours</div><div class="v">Sky Blue & Navy</div></div>
         <div class="fact"><div class="k">Motto</div><div class="v">We Don't Dim</div></div>
       </div>
     </div>
@@ -362,40 +357,30 @@
 <section id="squad">
   <div class="section-head">
     <div class="section-eyebrow">The Squad</div>
-    <h2 class="section-title">Starting Eleven Energy</h2>
-    <p class="section-sub">Replace these with your real roster — names, numbers, positions, whatever you've got.</p>
+    <h2 class="section-title">Founding Roster — Forming Now</h2>
+    <p class="section-sub">We're a new club building our first-ever squad. These are open spots — once you lock in real players, swap each card for their name, number, and position.</p>
   </div>
   <div class="squad-grid">
-    <div class="player-card"><div class="p-number">01</div><div class="p-name">J. Alaba</div><div class="p-pos">Goalkeeper</div><div class="p-tag">Captain. Commands the box, distributes long.</div></div>
-    <div class="player-card"><div class="p-number">04</div><div class="p-name">R. Okafor</div><div class="p-pos">Centre Back</div><div class="p-tag">Reads the game two passes ahead.</div></div>
-    <div class="player-card"><div class="p-number">07</div><div class="p-name">M. Torres</div><div class="p-pos">Winger</div><div class="p-tag">Top scorer. Lives on the touchline.</div></div>
-    <div class="player-card"><div class="p-number">08</div><div class="p-name">S. Karim</div><div class="p-pos">Midfielder</div><div class="p-tag">Engine of the side, box-to-box.</div></div>
-    <div class="player-card"><div class="p-number">10</div><div class="p-name">L. Novak</div><div class="p-pos">Playmaker</div><div class="p-tag">Vision first. Assists machine.</div></div>
-    <div class="player-card"><div class="p-number">11</div><div class="p-name">D. Reyes</div><div class="p-pos">Striker</div><div class="p-tag">Pace, finishing, zero hesitation.</div></div>
+    <div class="player-card"><div class="p-number">GK</div><div class="p-name">Open Spot</div><div class="p-pos">Goalkeeper</div><div class="p-tag">Looking for our first keeper.</div></div>
+    <div class="player-card"><div class="p-number">DF</div><div class="p-name">Open Spot</div><div class="p-pos">Defender</div><div class="p-tag">Backline is wide open.</div></div>
+    <div class="player-card"><div class="p-number">DF</div><div class="p-name">Open Spot</div><div class="p-pos">Defender</div><div class="p-tag">Backline is wide open.</div></div>
+    <div class="player-card"><div class="p-number">MF</div><div class="p-name">Open Spot</div><div class="p-pos">Midfielder</div><div class="p-tag">Engine room, up for grabs.</div></div>
+    <div class="player-card"><div class="p-number">MF</div><div class="p-name">Open Spot</div><div class="p-pos">Midfielder</div><div class="p-tag">Engine room, up for grabs.</div></div>
+    <div class="player-card"><div class="p-number">FW</div><div class="p-name">Open Spot</div><div class="p-pos">Forward</div><div class="p-tag">Our first goal is still unclaimed.</div></div>
   </div>
 </section>
 
 <section id="fixtures">
   <div class="section-head">
     <div class="section-eyebrow">Fixtures</div>
-    <h2 class="section-title">Where We're Playing</h2>
-    <p class="section-sub">Swap in your real schedule when you have it.</p>
+    <h2 class="section-title">First Match: TBD</h2>
+    <p class="section-sub">We're a new club — no games played yet. Once a schedule is set, matches will show up here.</p>
   </div>
   <div class="fixtures-list">
     <div class="ticket featured">
-      <div class="t-date"><div class="day">14</div><div class="mon">Jul</div></div>
-      <div class="t-match"><div class="vs">Manshine City vs Volt United</div><div class="where">The Radiant · Home</div></div>
-      <div class="t-status live">This Week</div>
-    </div>
-    <div class="ticket">
-      <div class="t-date"><div class="day">21</div><div class="mon">Jul</div></div>
-      <div class="t-match"><div class="vs">Ironclad FC vs Manshine City</div><div class="where">Ironclad Park · Away</div></div>
-      <div class="t-status">Upcoming</div>
-    </div>
-    <div class="ticket">
-      <div class="t-date"><div class="day">29</div><div class="mon">Jul</div></div>
-      <div class="t-match"><div class="vs">Manshine City vs Nightfall SC</div><div class="where">The Radiant · Home</div></div>
-      <div class="t-status">Upcoming</div>
+      <div class="t-date"><div class="day">—</div><div class="mon">TBD</div></div>
+      <div class="t-match"><div class="vs">Manshine City's Debut Match</div><div class="where">Venue · To Be Announced</div></div>
+      <div class="t-status live">Coming Soon</div>
     </div>
   </div>
 </section>
@@ -414,7 +399,7 @@
 
 <footer>
   <div class="foot-col">
-    <div class="brand"><span class="dot"></span>MANSHINE CITY</div>
+    <div class="brand"><img src="crest.jpg" alt="Manshine City crest" class="brand-logo">MANSHINE CITY</div>
   </div>
   <div class="foot-col">
     <h4>CLUB</h4>
