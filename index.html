@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manshine City FC — We Don't Dim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #06070d;
+    --bg-panel: #0c0f1c;
+    --bg-panel-2: #10142650;
+    --cyan: #00f0ff;
+    --pink: #ff2fd0;
+    --gold: #f9e94e;
+    --ink: #eaf6ff;
+    --ink-dim: #8ea3c4;
+    --line: #1c2440;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(0,240,255,0.06), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(255,47,208,0.07), transparent 40%);
+  }
+
+  h1,h2,h3, .display{
+    font-family:'Rajdhani', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  ::selection{ background: var(--pink); color:#06070d; }
+
+  /* ---------- scanline / grid floor texture ---------- */
+  .grid-floor{
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(0,240,255,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.08) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 70%, transparent);
+    animation: floorDrift 18s linear infinite;
+    opacity:0.6;
+  }
+  @keyframes floorDrift{
+    from{ background-position: 0 0, 0 0; }
+    to{ background-position: 0 480px, 480px 0; }
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 5%;
+    background: linear-gradient(to bottom, rgba(6,7,13,0.95), rgba(6,7,13,0));
+    backdrop-filter: blur(2px);
+  }
+  .brand{
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700; font-size:1.3rem; letter-spacing:0.08em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand .dot{
+    width:10px; height:10px; border-radius:50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan), 0 0 18px var(--cyan);
+  }
+  .navlinks{ display:flex; gap:34px; font-size:0.95rem; font-weight:600; letter-spacing:0.05em; }
+  .navlinks a{ color: var(--ink-dim); position:relative; padding-bottom:4px; transition: color .25s; }
+  .navlinks a:hover{ color: var(--cyan); }
+  .navlinks a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background: var(--cyan); box-shadow:0 0 8px var(--cyan);
+    transition: width .25s;
+  }
+  .navlinks a:hover::after{ width:100%; }
+  .nav-cta{
+    border:1px solid var(--pink); color:var(--pink);
+    padding:9px 18px; border-radius:100px; font-size:0.85rem; font-weight:700;
+    letter-spacing:0.05em; box-shadow: 0 0 12px rgba(255,47,208,0.35) inset;
+    transition: all .25s;
+  }
+  .nav-cta:hover{ background:var(--pink); color:#06070d; box-shadow:0 0 22px var(--pink); }
+  .menu-btn{ display:none; background:none; border:none; color:var(--ink); font-size:1.6rem; cursor:pointer; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:120px 20px 80px;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    color: var(--ink-dim); letter-spacing:0.35em; font-size:0.75rem;
+    font-weight:600; text-transform:uppercase; margin-bottom:18px;
+  }
+  .hero-sign{
+    font-family:'Monoton', cursive;
+    font-size: clamp(2.6rem, 9vw, 7rem);
+    line-height:1.05;
+    color: #fff;
+    text-shadow:
+      0 0 6px #fff,
+      0 0 14px var(--cyan),
+      0 0 28px var(--cyan),
+      0 0 55px var(--cyan),
+      0 0 3px var(--pink);
+    animation: flicker 5s infinite;
+  }
+  .hero-sign .accent{
+    color:#fff;
+    text-shadow:
+      0 0 6px #fff,
+      0 0 14px var(--pink),
+      0 0 28px var(--pink),
+      0 0 55px var(--pink);
+  }
+  @keyframes flicker{
+    0%, 3%, 6%, 100%{ opacity:1; }
+    4%{ opacity:0.4; }
+    5%{ opacity:0.9; }
+    45%{ opacity:1; }
+    46%{ opacity:0.5; }
+    47%{ opacity:1; }
+  }
+  .hero-tag{
+    margin-top:26px; font-size:clamp(1rem,2vw,1.25rem);
+    color: var(--ink-dim); font-family:'Rajdhani',sans-serif; font-weight:600;
+    letter-spacing:0.08em; max-width:600px;
+  }
+  .hero-actions{ display:flex; gap:18px; margin-top:44px; flex-wrap:wrap; justify-content:center; }
+  .btn{
+    padding:14px 30px; border-radius:100px; font-family:'Rajdhani',sans-serif;
+    font-weight:700; letter-spacing:0.06em; font-size:1rem; cursor:pointer;
+    transition: all .25s; display:inline-block; text-transform:uppercase;
+  }
+  .btn-primary{
+    background: var(--cyan); color:#06070d;
+    box-shadow: 0 0 20px rgba(0,240,255,0.6);
+    border:1px solid var(--cyan);
+  }
+  .btn-primary:hover{ box-shadow:0 0 34px rgba(0,240,255,0.9); transform:translateY(-2px); }
+  .btn-ghost{
+    border:1px solid var(--ink-dim); color:var(--ink);
+  }
+  .btn-ghost:hover{ border-color:var(--pink); color:var(--pink); box-shadow:0 0 16px rgba(255,47,208,0.4); }
+
+  .hero-stats{
+    display:flex; gap:50px; margin-top:70px; flex-wrap:wrap; justify-content:center;
+  }
+  .stat{ text-align:center; }
+  .stat .num{
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-size:2.2rem; color:var(--gold);
+    text-shadow:0 0 14px rgba(249,233,78,0.7);
+  }
+  .stat .lbl{ font-size:0.75rem; color:var(--ink-dim); letter-spacing:0.15em; text-transform:uppercase; margin-top:4px;}
+
+  /* ---------- SECTION shell ---------- */
+  section{ position:relative; padding: 110px 5%; }
+  .section-head{ max-width:640px; margin: 0 auto 60px; text-align:center; }
+  .section-eyebrow{
+    color: var(--pink); font-size:0.78rem; font-weight:700; letter-spacing:0.3em;
+    text-shadow:0 0 10px rgba(255,47,208,0.6);
+  }
+  .section-title{ font-size: clamp(1.8rem, 4vw, 2.6rem); margin-top:10px; color:#fff; }
+  .section-sub{ color:var(--ink-dim); margin-top:14px; font-size:1rem; line-height:1.6; }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    display:grid; grid-template-columns: 0.9fr 1.1fr; gap:70px;
+    max-width:1100px; margin:0 auto; align-items:center;
+  }
+  .crest-wrap{ display:flex; justify-content:center; }
+  .crest{ width:230px; height:230px; }
+  .about-copy p{ color:var(--ink-dim); line-height:1.8; margin-bottom:18px; font-size:1.02rem;}
+  .about-copy strong{ color:var(--cyan); }
+  .facts{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:26px; }
+  .fact{
+    border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+    background: var(--bg-panel);
+  }
+  .fact .k{ font-size:0.7rem; color:var(--ink-dim); letter-spacing:0.15em; text-transform:uppercase; }
+  .fact .v{ font-family:'Rajdhani',sans-serif; font-weight:700; color:#fff; font-size:1.05rem; margin-top:4px;}
+
+  /* ---------- SQUAD ---------- */
+  .squad-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:24px; max-width:1200px; margin:0 auto;
+  }
+  .player-card{
+    position:relative; background: var(--bg-panel);
+    border:1px solid var(--line); border-radius:16px; padding:26px 22px;
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+    overflow:hidden;
+  }
+  .player-card::before{
+    content:''; position:absolute; top:-40%; left:-40%; width:180%; height:180%;
+    background: conic-gradient(from 0deg, transparent, rgba(0,240,255,0.12), transparent 30%);
+    opacity:0; transition:opacity .3s;
+  }
+  .player-card:hover{
+    transform: translateY(-6px);
+    border-color: var(--cyan);
+    box-shadow: 0 10px 40px rgba(0,240,255,0.18);
+  }
+  .player-card:hover::before{ opacity:1; }
+  .p-number{
+    font-family:'Rajdhani',sans-serif; font-weight:700; font-size:2.6rem;
+    color: transparent; -webkit-text-stroke: 1.5px var(--cyan); opacity:0.85;
+  }
+  .p-name{ font-family:'Rajdhani',sans-serif; font-weight:700; font-size:1.25rem; margin-top:8px; color:#fff;}
+  .p-pos{ color:var(--pink); font-size:0.78rem; letter-spacing:0.15em; text-transform:uppercase; margin-top:4px;}
+  .p-tag{ color:var(--ink-dim); font-size:0.88rem; margin-top:12px; line-height:1.5;}
+
+  /* ---------- FIXTURES (ticket stub style) ---------- */
+  .fixtures-list{ max-width:820px; margin:0 auto; display:flex; flex-direction:column; gap:18px; }
+  .ticket{
+    display:grid; grid-template-columns: 110px 1fr 130px;
+    align-items:center; gap:20px;
+    background: var(--bg-panel);
+    border:1px dashed var(--line);
+    border-radius:14px; padding:20px 26px;
+    position:relative;
+  }
+  .ticket.featured{
+    border:1px solid var(--pink);
+    box-shadow:0 0 26px rgba(255,47,208,0.25);
+  }
+  .ticket::after{
+    content:''; position:absolute; right:130px; top:50%; transform:translateY(-50%);
+    width:1px; height:70%; background: repeating-linear-gradient(var(--line) 0 6px, transparent 6px 12px);
+  }
+  .t-date{ text-align:center; font-family:'Rajdhani',sans-serif; }
+  .t-date .day{ font-size:1.8rem; font-weight:700; color:var(--gold); line-height:1; }
+  .t-date .mon{ font-size:0.75rem; color:var(--ink-dim); letter-spacing:0.15em; text-transform:uppercase; }
+  .t-match{ }
+  .t-match .vs{ font-family:'Rajdhani',sans-serif; font-weight:700; font-size:1.15rem; color:#fff; }
+  .t-match .where{ color:var(--ink-dim); font-size:0.85rem; margin-top:4px; }
+  .t-status{ text-align:right; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; color:var(--cyan); }
+  .t-status.live{ color:var(--pink); }
+
+  /* ---------- JOIN CTA ---------- */
+  .join{
+    max-width:900px; margin:0 auto; text-align:center;
+    border:1px solid var(--line); border-radius:24px; padding:70px 40px;
+    background: radial-gradient(circle at 50% 0%, rgba(0,240,255,0.08), transparent 60%), var(--bg-panel);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line); padding:50px 5% 30px;
+    display:flex; flex-wrap:wrap; gap:30px; justify-content:space-between; align-items:flex-start;
+  }
+  .foot-col h4{ font-size:0.85rem; letter-spacing:0.15em; color:var(--ink-dim); margin-bottom:14px; }
+  .foot-col a{ display:block; color:var(--ink); font-size:0.9rem; margin-bottom:8px; opacity:0.85; transition:opacity .2s,color .2s;}
+  .foot-col a:hover{ opacity:1; color:var(--cyan); }
+  .foot-bottom{
+    text-align:center; margin-top:40px; padding-top:24px; border-top:1px solid var(--line);
+    color: var(--ink-dim); font-size:0.8rem; width:100%;
+  }
+  .foot-bottom .url{ color: var(--gold); }
+
+  @media (max-width: 860px){
+    .about{ grid-template-columns:1fr; }
+    .navlinks{
+      position:fixed; top:64px; right:0; left:0; background:var(--bg);
+      flex-direction:column; padding:24px 6%; gap:20px; border-bottom:1px solid var(--line);
+      transform: translateY(-140%); transition: transform .3s; z-index:99;
+    }
+    .navlinks.open{ transform: translateY(0); }
+    .menu-btn{ display:block; }
+    .ticket{ grid-template-columns: 70px 1fr; }
+    .t-status{ grid-column: 1 / -1; text-align:left; margin-top:8px; }
+    .ticket::after{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand"><span class="dot"></span>MANSHINE CITY</div>
+  <button class="menu-btn" id="menuBtn">☰</button>
+  <div class="navlinks" id="navLinks">
+    <a href="#about">Club</a>
+    <a href="#squad">Squad</a>
+    <a href="#fixtures">Fixtures</a>
+    <a href="#join">Join</a>
+  </div>
+  <a class="nav-cta" href="#join">Join The Glow</a>
+</nav>
+
+<section class="hero">
+  <div class="grid-floor"></div>
+  <div class="hero-eyebrow">Est. 2019 · The Radiant, Section 7</div>
+  <h1 class="hero-sign">MAN<span class="accent">SHINE</span><br>CITY</h1>
+  <p class="hero-tag">We don't chase the light. We are the light. Electric football, played loud, played bright.</p>
+  <div class="hero-actions">
+    <a href="#fixtures" class="btn btn-primary">See Next Match</a>
+    <a href="#squad" class="btn btn-ghost">Meet The Squad</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="num">18</div><div class="lbl">Wins This Season</div></div>
+    <div class="stat"><div class="num">64</div><div class="lbl">Goals Scored</div></div>
+    <div class="stat"><div class="num">#2</div><div class="lbl">League Standing</div></div>
+    <div class="stat"><div class="num">1.2K</div><div class="lbl">Fans In The Stands</div></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <div class="section-eyebrow">The Club</div>
+    <h2 class="section-title">Built On Shine</h2>
+    <p class="section-sub">Every club has a colour. We picked a wattage.</p>
+  </div>
+  <div class="about">
+    <div class="crest-wrap">
+      <svg class="crest" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge>
+              <feMergeNode in="blur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <polygon points="100,10 180,55 180,140 100,190 20,140 20,55" fill="none" stroke="#00f0ff" stroke-width="3" filter="url(#glow)"/>
+        <polygon points="100,30 162,65 162,130 100,168 38,130 38,65" fill="none" stroke="#ff2fd0" stroke-width="1.5" opacity="0.7"/>
+        <text x="100" y="98" text-anchor="middle" font-family="Rajdhani, sans-serif" font-weight="700" font-size="34" fill="#ffffff" filter="url(#glow)">MC</text>
+        <path d="M70 122 L90 122 L82 140 L112 114 L96 114 L104 96 L70 122 Z" fill="#f9e94e" filter="url(#glow)"/>
+      </svg>
+    </div>
+    <div class="about-copy">
+      <p>Manshine City started in a car park with two goalposts made of jackets and one rule: play like the floodlights are already on. Seven seasons later, the jackets are gone, but the rule stayed.</p>
+      <p>We're a <strong>attacking, high-tempo</strong> side built around movement and confidence on the ball. Home games are loud. Away days are louder. This is where <strong>the shine</strong> comes from — showing up bright when it matters most.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Founded</div><div class="v">2019</div></div>
+        <div class="fact"><div class="k">Home Ground</div><div class="v">The Radiant</div></div>
+        <div class="fact"><div class="k">Colours</div><div class="v">Cyan & Pink</div></div>
+        <div class="fact"><div class="k">Motto</div><div class="v">We Don't Dim</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="squad">
+  <div class="section-head">
+    <div class="section-eyebrow">The Squad</div>
+    <h2 class="section-title">Starting Eleven Energy</h2>
+    <p class="section-sub">Replace these with your real roster — names, numbers, positions, whatever you've got.</p>
+  </div>
+  <div class="squad-grid">
+    <div class="player-card"><div class="p-number">01</div><div class="p-name">J. Alaba</div><div class="p-pos">Goalkeeper</div><div class="p-tag">Captain. Commands the box, distributes long.</div></div>
+    <div class="player-card"><div class="p-number">04</div><div class="p-name">R. Okafor</div><div class="p-pos">Centre Back</div><div class="p-tag">Reads the game two passes ahead.</div></div>
+    <div class="player-card"><div class="p-number">07</div><div class="p-name">M. Torres</div><div class="p-pos">Winger</div><div class="p-tag">Top scorer. Lives on the touchline.</div></div>
+    <div class="player-card"><div class="p-number">08</div><div class="p-name">S. Karim</div><div class="p-pos">Midfielder</div><div class="p-tag">Engine of the side, box-to-box.</div></div>
+    <div class="player-card"><div class="p-number">10</div><div class="p-name">L. Novak</div><div class="p-pos">Playmaker</div><div class="p-tag">Vision first. Assists machine.</div></div>
+    <div class="player-card"><div class="p-number">11</div><div class="p-name">D. Reyes</div><div class="p-pos">Striker</div><div class="p-tag">Pace, finishing, zero hesitation.</div></div>
+  </div>
+</section>
+
+<section id="fixtures">
+  <div class="section-head">
+    <div class="section-eyebrow">Fixtures</div>
+    <h2 class="section-title">Where We're Playing</h2>
+    <p class="section-sub">Swap in your real schedule when you have it.</p>
+  </div>
+  <div class="fixtures-list">
+    <div class="ticket featured">
+      <div class="t-date"><div class="day">14</div><div class="mon">Jul</div></div>
+      <div class="t-match"><div class="vs">Manshine City vs Volt United</div><div class="where">The Radiant · Home</div></div>
+      <div class="t-status live">This Week</div>
+    </div>
+    <div class="ticket">
+      <div class="t-date"><div class="day">21</div><div class="mon">Jul</div></div>
+      <div class="t-match"><div class="vs">Ironclad FC vs Manshine City</div><div class="where">Ironclad Park · Away</div></div>
+      <div class="t-status">Upcoming</div>
+    </div>
+    <div class="ticket">
+      <div class="t-date"><div class="day">29</div><div class="mon">Jul</div></div>
+      <div class="t-match"><div class="vs">Manshine City vs Nightfall SC</div><div class="where">The Radiant · Home</div></div>
+      <div class="t-status">Upcoming</div>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="join">
+    <div class="section-eyebrow">Join The Glow</div>
+    <h2 class="section-title" style="margin-top:10px;">Play With Us</h2>
+    <p class="section-sub" style="margin:16px auto 34px;">Tryouts, sponsorships, or just want to shout from the stands — get in touch.</p>
+    <div class="hero-actions" style="margin-top:0;">
+      <a href="mailto:team@arcollections.dpdns.org" class="btn btn-primary">Email The Club</a>
+      <a href="#" class="btn btn-ghost">Follow on Socials</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-col">
+    <div class="brand"><span class="dot"></span>MANSHINE CITY</div>
+  </div>
+  <div class="foot-col">
+    <h4>CLUB</h4>
+    <a href="#about">About</a>
+    <a href="#squad">Squad</a>
+    <a href="#fixtures">Fixtures</a>
+  </div>
+  <div class="foot-col">
+    <h4>CONNECT</h4>
+    <a href="mailto:team@arcollections.dpdns.org">Email</a>
+    <a href="#">Discord</a>
+    <a href="#">Instagram</a>
+  </div>
+  <div class="foot-bottom">
+    Manshine City FC · Hosted at <span class="url">arcollections.dpdns.org</span> · We Don't Dim
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+
+</body>
+</html>
